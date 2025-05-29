@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELO二维码布局优化</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        neutral: '#6B7280',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .qr-container {
+                @apply grid gap-16 max-w-6xl mx-auto px-4 py-8 justify-items-center;
+            }
+            .qr-row {
+                @apply grid grid-cols-2 gap-16 mb-16 justify-items-center; /* 修改为固定2列布局 */
+            }
+            .qr-card {
+                @apply bg-white rounded-lg shadow-md overflow-hidden transition-all duration-200 hover:shadow-lg hover:scale-[1.01] w-full max-w-xs;
+            }
+            .qr-image {
+                @apply w-full h-48 object-contain object-center border border-gray-100 rounded-t-lg;
+            }
+            .qr-caption {
+                @apply p-2 text-center text-sm font-medium text-gray-700 bg-gray-50 rounded-b-lg;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col items-center">
+    <header class="bg-gradient-to-r from-primary to-secondary text-white shadow-md w-full">
+        <div class="container mx-auto px-4 py-4 text-center">
+            <h1 class="text-xl font-bold inline-flex items-center">
+                <i class="fa fa-qrcode mr-2"></i>应用二维码中心
+            </h1>
+            <p class="text-white/80 text-sm mt-1">扫描下方二维码下载对应的应用版本</p>
+        </div>
+    </header>
+
+    <main class="qr-container w-full">
+        <!-- 第1行：iOS和Android QA 二维码 -->
+        <div class="qr-row w-full">
+            <div class="qr-card">
+                <img class="qr-image" src="qrcodeios.png" alt="QA-QR Code iOS-Velo">
+                <div class="qr-caption">QA-QR Code iOS-Velo</div>
+            </div>
+            
+            <div class="qr-card">
+                <img class="qr-image" src="qrcodeandroid.png" alt="QA-QR Code Android-Velo">
+                <div class="qr-caption">QA-QR Code Android-Velo</div>
+            </div>
+        </div>
+        
+        <!-- 第2行：iOS和Android Bypass QA 二维码 -->
+        <div class="qr-row w-full">
+            <div class="qr-card">
+                <img class="qr-image" src="qrcodeios_bypass.png" alt="Bypass QA-QR Code iOS-Velo">
+                <div class="qr-caption">Bypass-QR Code iOS-Velo</div>
+            </div>
+            
+            <div class="qr-card">
+                <img class="qr-image" src="qrcodeandroid_bypass.png" alt="Bypass QA-QR Code Android-Velo">
+                <div class="qr-caption">Bypass-QR Code Android-Velo</div>
+            </div>
+        </div>
+        
+        <!-- 第3行：iOS和Android UAT 二维码 -->
+        <div class="qr-row w-full">
+            <div class="qr-card">
+                <img class="qr-image" src="qrcodeios_uat.png" alt="UAT-QR Code iOS-Velo">
+                <div class="qr-caption">UAT-QR Code iOS-Velo</div>
+            </div>
+            
+            <div class="qr-card">
+                <img class="qr-image" src="qrcodeandroid_uat.png" alt="UAT-QR Code Android-Velo">
+                <div class="qr-caption">UAT-QR Code Android-Velo</div>
+            </div>
+        </div>
+        
+        <!-- 第4行：Android Tencent QA 二维码和占位 -->
+        <div class="qr-row w-full">
+            <div class="qr-card">
+                <img class="qr-image" src="qrcodeandroid_tencent.png" alt="Tencent QA-QR Code Android-Velo">
+                <div class="qr-caption">Tencent QA-QR Code Android-Velo</div>
+            </div>
+            
+            <div class="qr-card">
+                <img class="qr-image" src="qrcodeandroid_tencent_uat.png" alt="Tencent UAT-QR Code Android-Velo">
+                <div class="qr-caption">Tencent UAT-QR Code Android-Velo</div>
+            </div>
+        </div>
+        <!-- 第5行：iOS Business QA 和 Android Business QA 二维码 -->
+        <div class="qr-row w-full">
+            <div class="qr-card">
+                <img class="qr-image" src="qrcodeios_business.png" alt="Business QA-QR Code iOS">
+                <div class="qr-caption">Business QA-QR Code iOS</div>
+            </div>
+            
+            <div class="qr-card">
+                <img class="qr-image" src="qrcodeandroid_business.png" alt="Business QA-QR Code Android">
+                <div class="qr-caption">Business QA-QR Code Android</div>
+            </div>
+        </div>
+    </main>
+
+<footer class="bg-gray-800 text-white py-4 mt-8 w-full">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col items-center justify-center text-center"> <!-- 关键修改点 -->
+            <h2 class="text-sm font-medium">Velo应用中心</h2>
+            <p class="text-xs text-gray-400 mt-1">© 2025 Velo. 保留所有权利</p>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', () => {
+            const qrCards = document.querySelectorAll('.qr-card:not(.opacity-0)'); // 排除占位元素
+            qrCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 50 * index);
+            });
+        });
+    </script>
+</body>
+</html>
