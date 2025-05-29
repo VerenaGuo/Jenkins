@@ -51,7 +51,7 @@ pipeline {
             steps {
                 dir("velo-android") {
                     // 编译项目
-                    sh "./gradlew clean assembleuatTencentDebug"
+                    sh "./gradlew clean assembleSMBuatDebug"
                     // 复制 apk 包到Apache服务器
                     sh "mkdir -p ${env.webBasePath}${env.Project_Name}/${env.date}"
                     sh "cp -f ${env.buildPath}app/build/outputs/apk/SMBuat/debug/app-SMBuat-debug.apk ${env.webBasePath}${env.Project_Name}/${env.date}/app-SMBuat-debug.apk"
