@@ -74,7 +74,7 @@ pipeline {
                     sh "cp -f /Users/yuguo/App/ipa/velo-ios.ipa ${env.webBasePath}${env.Project_Name}/${env.date}/velo-ios.ipa"
                 }
                 // 复制 plist 模版
-                sh "cd /Library/WebServer/Documents/ios;cp -f ExportOptions.plist ${env.Project_Name}/${env.date}/ExportOptions.plist"
+                sh "cd /Library/WebServer/Documents/ios;cp -f ExportOptions_business.plist ${env.Project_Name}/${env.date}/ExportOptions.plist"
                 // 修改 plist
                 script {
                     // 定义文件路径
