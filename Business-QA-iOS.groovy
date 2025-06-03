@@ -3,7 +3,7 @@ pipeline {
     // 定义环境变量
     environment {
         // 需要构建的分支名称
-        branch = "uat"
+        branch = "qa"
         // 项目名称
         Project_Name = "velo-ios"
         // Target类型
@@ -11,7 +11,7 @@ pipeline {
         // Apache服务器iOS项目根目录
         webBasePath = "/Library/WebServer/Documents/ios/"
         // 项目存储地址
-        buildPath = "/Users/yuguo/.jenkins/workspace/UAT-iOS/velo-ios"
+        buildPath = "/Users/yuguo/.jenkins/workspace/Business-iOS/velo-ios"
         // plist路径
         AdHocExportOptionsPlist = "/Users/yuguo/App/ipa/ExportOptions.plist"
         // archive存储路径
@@ -44,13 +44,13 @@ pipeline {
                     echo "Reset config"
                     sh "git reset --hard HEAD"
                     // 执行 pod install 更新项目中的第三方库
-                    sh "cp -f /Users/yuguo/Documents/iosconfigjenkis/Podfile /Users/yuguo/.jenkins/workspace/UAT-iOS/velo-ios"
+                    sh "cp -f /Users/yuguo/Documents/iosconfigjenkis/Podfile /Users/yuguo/.jenkins/workspace/Business-iOS/velo-ios"
                     sh "${env.PROXY_SETTINGS};export LANG=en_US.UTF-8;/usr/local/bin/pod cache clean --all;/usr/local/bin/pod deintegrate;/usr/local/bin/pod install"
                     // 更新配置
-                    sh "cp -f /Users/yuguo/Documents/iosconfigjenkis/VLAppConfiguration_uat.plist /Users/yuguo/.jenkins/workspace/UAT-iOS/velo-ios/velo-ios/Configurations/VLAppConfiguration.plist"
-                    sh "cp -f /Users/yuguo/Documents/iosconfigjenkis/velo-iosDebug.entitlements /Users/yuguo/.jenkins/workspace/UAT-iOS/velo-ios/velo-ios/velo-iosDebug.entitlements"
-                    sh "cp -f /Users/yuguo/Documents/iosconfigjenkis/velo-iosRelease.entitlements /Users/yuguo/.jenkins/workspace/UAT-iOS/velo-ios/velo-ios/velo-iosRelease.entitlements"
-                    sh "cp -f /Users/yuguo/Documents/iosconfigjenkis/velo-ios.xcodeproj/project.pbxproj /Users/yuguo/.jenkins/workspace/UAT-iOS/velo-ios/velo-ios.xcodeproj/project.pbxproj"
+                    sh "cp -f /Users/yuguo/Documents/iosconfigjenkis/VLAppConfiguration_business.plist /Users/yuguo/.jenkins/workspace/Business-iOS/velo-ios/velo-ios/Configurations/VLAppConfiguration.plist"
+                    sh "cp -f /Users/yuguo/Documents/iosconfigjenkis/velo-iosDebug_business.entitlements /Users/yuguo/.jenkins/workspace/Business-iOS/velo-ios/velo-ios/velo-iosDebug.entitlements"
+                    sh "cp -f /Users/yuguo/Documents/iosconfigjenkis/velo-iosRelease_business.entitlements /Users/yuguo/.jenkins/workspace/Business-iOS/velo-ios/velo-ios/velo-iosRelease.entitlements"
+                    sh "cp -f /Users/yuguo/Documents/iosconfigjenkis/velo-ios.xcodeproj/project_business.pbxproj /Users/yuguo/.jenkins/workspace/Business-iOS/velo-ios/velo-ios.xcodeproj/project.pbxproj"
                 }
             }
         }
@@ -99,10 +99,10 @@ pipeline {
                         def imageBase64 = imageBytes.encodeBase64().toString()
 
                         mail(
-                            subject: 'UAT-iOS Velo',
+                            subject: 'Business QA-iOS',
                             body: """
                             <html><body>
-                            <p>扫描二维码安装UAT-iOS应用</p>
+                            <p>扫描二维码安装Business QA-iOS应用</p>
                             <img src='data:image/png;base64,${imageBase64}' alt='qrcode' />
                             </body></html>
                             """,
@@ -116,14 +116,14 @@ pipeline {
                 }
             }
         }
-    } 
+    }   
     post {
         success {
             script {
                 // 添加下载链接到构建描述
                 currentBuild.description = """
                 <div style="padding: 10px; background-color: #000; border: 1px solid #333; color: #fff;">
-                    <h3>UAT iOS Velo 下载</h3>
+                    <h3>Business QA iOS下载</h3>
                     <a href='http://192.168.8.56/ios/${env.Project_Name}/${env.date}/velo-ios.ipa' style='display: inline-block; padding: 8px 16px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 4px;'>
                         下载 velo-ios.ipa
                     </a>
@@ -133,7 +133,7 @@ pipeline {
                 """
             }
             // 更新index.html页面的二维码
-            sh "cp -f ${env.webBasePath}${env.Project_Name}/${env.date}/qrcode.png /Library/WebServer/Documents/qrcodeios_uat.png"
+            sh "cp -f ${env.webBasePath}${env.Project_Name}/${env.date}/qrcode.png /Library/WebServer/Documents/qrcodeios_business.png"
             // 删除无效缓存，列出所有文件，按字典顺序排序，保留前5个，删除其余(保留最新的5次构建)
             sh "cd ${env.webBasePath}${env.Project_Name};ls -1 | sort -r | tail -n +6 | xargs -I {} rm -rf {}"
         }
