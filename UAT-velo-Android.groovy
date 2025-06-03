@@ -23,7 +23,7 @@ pipeline {
                     if (fileExists("velo-android")) {
                         // 项目已经存在直接执行 git pull 更新代码.中国需要翻墙，设置代理
                         dir("velo-android") {
-                            sh "export https_proxy=http://127.0.0.1:7897 http_proxy=http://127.0.0.1:7897 all_proxy=socks5://127.0.0.1:7897; git checkout ${env.branch}; git pull; git stash; git submodule update --init; git submodule update --remote"
+                            sh "export https_proxy=http://127.0.0.1:7897 http_proxy=http://127.0.0.1:7897 all_proxy=socks5://127.0.0.1:7897;git stash; git checkout ${env.branch}; git pull; git submodule update --init; git submodule update --remote"
                         }
                     } else {
                         // 项目不存在, 克隆指定的分支到本地.中国需要翻墙，设置代理
@@ -63,7 +63,7 @@ pipeline {
                     // sh "./gradlew clean assembleqaTencentDebug"  
                     // 复制 apk 包到Apache服务器
                     sh "mkdir -p ${env.webBasePath}${env.Project_Name}/${env.date}"
-                    sh "cp -f ${env.buildPath}/app/build/outputs/apk/uat/debug/app-uat-debug.apk ${env.webBasePath}${env.Project_Name}/${env.date}/app-uat-debug.apk"
+                    sh "cp -f ${env.buildPath}app/build/outputs/apk/uat/debug/app-uat-debug.apk ${env.webBasePath}${env.Project_Name}/${env.date}/app-uat-debug.apk"
                     // 生成二维码
                     sh "cd ${env.webBasePath}${env.Project_Name}/${env.date};/usr/local/bin/qrencode -o qrcode.png -s 4 -m 2 'http://192.168.8.56/android/${env.Project_Name}/${env.date}/app-uat-debug.apk'"
                 }
