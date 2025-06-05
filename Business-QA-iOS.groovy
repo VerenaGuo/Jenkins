@@ -7,7 +7,7 @@ pipeline {
         // 项目名称
         Project_Name = "velo-ios"
         // Target类型
-        Confignation_Target = "Release"
+        Configuration_Target = "Release"
         // Apache服务器iOS项目根目录
         webBasePath = "/Library/WebServer/Documents/ios/"
         // 项目存储地址
@@ -58,7 +58,7 @@ pipeline {
             steps {
                 dir("velo-ios") {
                     // 清理项目
-                    sh "xcodebuild clean -workspace ${env.Project_Name}.xcworkspace -scheme ${env.Project_Name} -configuration ${env.Confignation_Target}"
+                    sh "xcodebuild clean -workspace ${env.Project_Name}.xcworkspace -scheme ${env.Project_Name} -configuration ${env.Configuration_Target}"
                     // 编译项目
                     sh "xcodebuild archive -workspace ${env.Project_Name}.xcworkspace -scheme ${env.Project_Name} -sdk iphoneos -archivePath ${env.archivePath} -configuration ${env.Confignation_Target}"
                 }
