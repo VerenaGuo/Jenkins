@@ -60,7 +60,7 @@ pipeline {
                     // 清理项目
                     sh "xcodebuild clean -workspace ${env.Project_Name}.xcworkspace -scheme ${env.Project_Name} -configuration ${env.Configuration_Target}"
                     // 编译项目
-                    sh "xcodebuild archive -workspace ${env.Project_Name}.xcworkspace -scheme ${env.Project_Name} -sdk iphoneos -archivePath ${env.archivePath} -configuration ${env.Confignation_Target}"
+                    sh "xcodebuild archive -workspace ${env.Project_Name}.xcworkspace -scheme ${env.Project_Name} -sdk iphoneos -archivePath ${env.archivePath} -configuration ${env.Configuration_Target}"
                 }
             }
         }
