@@ -50,7 +50,7 @@ pipeline {
                     sh "cp -f /Users/yuguo/Documents/iosconfigjenkis/VLAppConfiguration.plist /Users/yuguo/.jenkins/workspace/Velo-iOS/velo-ios/velo-ios/Configurations/VLAppConfiguration.plist"
                     sh "cp -f /Users/yuguo/Documents/iosconfigjenkis/velo-iosDebug.entitlements /Users/yuguo/.jenkins/workspace/Velo-iOS/velo-ios/velo-ios/velo-iosDebug.entitlements"
                     sh "cp -f /Users/yuguo/Documents/iosconfigjenkis/velo-iosRelease.entitlements /Users/yuguo/.jenkins/workspace/Velo-iOS/velo-ios/velo-ios/velo-iosRelease.entitlements"
-                    sh "cp -f /Users/yuguo/Documents/iosconfigjenkis/velo-ios.xcodeproj/project.pbxproj /Users/yuguo/.jenkins/workspace/Velo-iOS/velo-ios/velo-ios.xcodeproj/project.pbxproj"
+                    sh "cp -f /Users/yuguo/Documents/iosconfigjenkis/project1.pbxproj /Users/yuguo/.jenkins/workspace/Velo-iOS/velo-ios/velo-ios.xcodeproj/project.pbxproj"
 
                 }
             }
