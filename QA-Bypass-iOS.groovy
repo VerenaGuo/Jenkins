@@ -13,7 +13,7 @@ pipeline {
         // 项目存储地址
         buildPath = "/Users/yuguo/.jenkins/workspace/Bypass-iOS/velo-ios"
         // plist路径
-        AdHocExportOptionsPlist = "/Users/yuguo/App/ipa/ExportOptions.plist"
+        AdHocExportOptionsPlist = "/Users/yuguo/App/ipa/ExportOptions_velo.plist"
         // archive存储路径
         archivePath = "/Users/yuguo/Library/Developer/Xcode/Archives/velo-ios.xcarchive"
         // ipa存储路径
